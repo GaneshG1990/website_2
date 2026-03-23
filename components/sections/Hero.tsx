@@ -1,46 +1,57 @@
 "use client";
 
-import { useState } from "react";
-import Modal from "@/components/ui/Modal";
+import { motion } from "framer-motion";
+import Container from "../ui/container";
 
-export default function Hero() {
-  const [open, setOpen] = useState(false);
-
+export default function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-200 px-4">
-      <div className="max-w-6xl w-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 rounded-3xl shadow-2xl p-8 text-center text-white relative">
-        
-        <h1 className="text-4xl md:text-6xl font-bold tracking-widest">
-          Build Smarter <br /> Grow Faster
-        </h1>
+    <Container>
+      <section className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl mt-10">
 
-        <p className="mt-4 text-lg uppercase tracking-widest">
-          The Best Way to Success
-        </p>
+        {/* Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-indigo-600" />
+        <div className="absolute inset-0 bg-black/20" />
 
-        <p className="mt-6 max-w-xl mx-auto text-sm opacity-90">
-          From Idea to Intelligence: We build AI-powered software,
-          apps, and automation systems.
-        </p>
+        {/* Animated blobs */}
+        <motion.div
+          animate={{ y: [0, -30, 0] }}
+          transition={{ duration: 6, repeat: Infinity }}
+          className="absolute top-10 left-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"
+        />
 
-        <div className="mt-8 flex gap-4 justify-center flex-wrap">
-          <button
-            onClick={() => setOpen(true)}
-            className="bg-white text-black px-6 py-3 rounded-full font-semibold"
-          >
-            Get Started
-          </button>
+        <motion.div
+          animate={{ y: [0, -20, 0] }}
+          transition={{ duration: 8, repeat: Infinity }}
+          className="absolute bottom-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-3xl"
+        />
 
-          <a
-            href="#contact"
-            className="border border-white px-6 py-3 rounded-full"
-          >
-            Contact Us
-          </a>
+        {/* Content */}
+        <div className="relative z-10 text-center px-6 py-32">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-widest">
+            BUILD SMARTER <br /> GROW FASTER
+          </h1>
+
+          <p className="mt-6 text-sm tracking-[0.3em] text-white/80 uppercase">
+            THE BEST WAY TO SUCCESS
+          </p>
+
+          <p className="mt-6 max-w-2xl mx-auto text-white/80">
+            From Idea to Intelligence: We build the full digital stack,
+            empowered by AI. Custom Software, Powerful AI, and Professional
+            Apps that drive your business forward.
+          </p>
+
+          <div className="mt-10 flex justify-center gap-4">
+            <button className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:scale-105 transition">
+              GET STARTED
+            </button>
+
+            <button className="px-6 py-3 rounded-full border border-white/30 hover:bg-white/10 transition">
+              CONTACT US
+            </button>
+          </div>
         </div>
-
-        {open && <Modal onClose={() => setOpen(false)} />}
-      </div>
-    </section>
+      </section>
+    </Container>
   );
 }

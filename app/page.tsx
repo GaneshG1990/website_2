@@ -1,21 +1,23 @@
-import Navbar from "@/components/layout/Navbar";
-import Hero from "@/components/sections/Hero";
-import CoreFocus from "@/components/sections/CoreFocus";
-import Products from "@/components/sections/Products";
-import Design from "@/components/sections/Design";
-import Guidance from "@/components/sections/Guidance";
-import Contact from "@/components/sections/Contact";
+import Footer from "@/components/layout/footer";
+import ContactSection from "@/components/sections/ContactSection";
+import CTASection from "@/components/sections/CTA_Section";
+import DesignSection from "@/components/sections/DesignSection";
+import FeaturesSection from "@/components/sections/FeaturesSection";
+import Hero from "@/components/sections/hero";
+import ProductSection from "@/components/sections/ProductSection";
+import SupportSection from "@/components/sections/SupportSection";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
       <Hero />
-      <CoreFocus />
-      <Products />
-      <Design />
-      <Guidance />
-      <Contact />
+      <FeaturesSection />
+      <ProductSection />
+      <DesignSection />
+      <SupportSection />
+      <ContactSection />
+      <CTASection />
+      <Footer />
     </>
   );
 }
