@@ -61,13 +61,7 @@ export default function Navbar() {
                 LOGIN
               </button>
 
-              <button
-                className="px-5 py-2 rounded-full text-sm font-medium text-white 
-                bg-gradient-to-r from-blue-600 to-purple-600 
-                hover:opacity-90 transition"
-              >
-                Get Started
-              </button>
+             
             </div>
 
           </div>

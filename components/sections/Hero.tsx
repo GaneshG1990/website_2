@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Container from "../ui/container";
+import Modal from "../ui/model";
+import RequirementForm from "../ui/requirment";
 
 const slides = [
   {
@@ -25,6 +27,7 @@ const slides = [
 
 export default function HeroSection() {
   const [index, setIndex] = useState(0);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -78,14 +81,18 @@ export default function HeroSection() {
 
           {/* CTA */}
           <div className="mt-10 flex justify-center gap-4 flex-wrap">
-            <button className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:scale-105 transition">
-              Get Started
-            </button>
+            <button
+                onClick={() => setOpen(true)}
+                className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:scale-105 transition"
+              >
+                Get Started
+              </button>
 
             <button className="px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 transition">
               Contact Us
             </button>
           </div>
+          
 
           {/* Dots */}
           <div className="mt-8 flex justify-center gap-2">
@@ -124,6 +131,9 @@ export default function HeroSection() {
 
         </div>
       </section>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <RequirementForm onClose={() => setOpen(false)} />
+      </Modal>
     </Container>
   );
 }

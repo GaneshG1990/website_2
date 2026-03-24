@@ -43,7 +43,7 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="py-20 md:py-24 bg-white">
+    <section className="py-12 md:py-14 bg-white">
       <Container>
         <div>
 
@@ -85,7 +85,7 @@ export default function FeaturesSection() {
                   variants={item}
                   whileHover={{ y: -6, scale: 1.02 }}
                   className="group relative p-6 rounded-2xl 
-                  bg-white border border-gray-200 shadow-md 
+                  bg-blue-100 border border-gray-200 shadow-md 
                   hover:shadow-xl transition-all duration-300"
                 >
                   <div className="relative z-10">

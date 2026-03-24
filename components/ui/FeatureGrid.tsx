@@ -35,7 +35,7 @@ export default function FeatureGrid({ label, heading, features }: Props) {
           <motion.div
             key={i}
             whileHover={{ y: -6, scale: 1.02 }}
-            className="group relative rounded-2xl border border-gray-200 bg-white p-6 
+            className="group relative rounded-2xl border border-gray-200 bg-blue-100 p-6 
             shadow-sm hover:shadow-lg transition-all duration-300"
           >
 

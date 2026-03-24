@@ -20,7 +20,7 @@ export default function ProductSection() {
   ];
 
   return (
-    <section className="relative py-8 md:py-14 bg-gray-1 overflow-hidden">
+    <section className="relative py-6 md:py-8 bg-gray-1 overflow-hidden">
 
       {/* top separator */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />

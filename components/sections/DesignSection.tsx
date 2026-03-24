@@ -51,7 +51,7 @@ export default function DesignSection() {
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                   viewport={{ once: true }}
                   className="group relative p-6 rounded-2xl 
-                  bg-white border border-gray-200 shadow-sm 
+                  bg-blue-100 border border-gray-200 shadow-sm 
                   hover:shadow-md transition-all duration-300"
                 >
                   {/* hover gradient */}

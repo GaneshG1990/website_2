@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Container from "../ui/container";
 import { Mail, Phone, Globe, MapPin } from "lucide-react";
+import Modal from "../ui/model";
+import RequirementForm from "../ui/requirment";
 
 type ContactItem = {
   label: string;
@@ -11,6 +14,7 @@ type ContactItem = {
 };
 
 export default function ContactSection() {
+  const [open, setOpen] = useState(false);
   const contacts: ContactItem[] = [
     {
       label: "Website",
@@ -19,27 +23,27 @@ export default function ContactSection() {
       icon: Globe,
     },
     {
-      label: "Mobile no.",
+      label: "Mobile",
       value: "+91 95351 05602",
       type: "phone",
       icon: Phone,
     },
     {
-      label: "Connect with the Founder",
+      label: "Founder",
       value: "ganesh@unishrine.com",
       type: "email",
       icon: Mail,
     },
     {
-      label: "Email ID",
+      label: "Email",
       value: "hello@unishrine.com",
       type: "email",
       icon: Mail,
     },
     {
-      label: "Office address",
+      label: "Office",
       value:
-        "Palm Arcade, no. 513/C, First floor, HBR Layout 4th block, 1st stage, Bengaluru–560 043",
+        "HBR Layout, Bengaluru, India",
       type: "text",
       icon: MapPin,
     },
@@ -61,81 +65,89 @@ export default function ContactSection() {
     }
   };
 
-  const renderValue = (item: ContactItem) => {
-    const display =
-      item.type === "link"
-        ? item.value.replace("https://", "")
-        : item.value;
-
-    return (
-      <span
-        onClick={() => handleClick(item)}
-        className="text-white font-medium cursor-pointer hover:underline underline-offset-4"
-      >
-        {display}
-      </span>
-    );
-  };
-
   return (
-    <Container>
-      <section className="relative mt-20 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-        
-        {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-indigo-600" />
+    <section className="py-20 md:py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <Container>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/25" />
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-        {/* Content */}
-        <div className="relative z-10 px-10 py-16">
-          
-          {/* Header */}
-          <div className="max-w-2xl">
-            <p className="text-xs tracking-widest text-white/70 uppercase">
+          {/* LEFT SIDE */}
+          <div className="max-w-xl">
+
+            <p className="text-xs tracking-widest text-blue-800 uppercase">
               CONTACT
             </p>
 
-            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-white">
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-gray-900">
               Let’s Build Something Intelligent Together
             </h2>
 
-            <p className="mt-4 text-white/80">
+            <p className="mt-4 text-gray-600">
               Reach out for project scoping, AI advisory, or rapid prototyping.
               We respond within one business day.
             </p>
+
+            {/* CTA */}
+            <div className="mt-8 flex gap-4 flex-wrap">
+              <button
+                onClick={() => setOpen(true)}
+                className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:scale-105 transition">
+              
+                Get Started
+              </button>
+
+              <button className="px-6 py-3 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100 transition">
+                Schedule Call
+              </button>
+            </div>
+
           </div>
 
-          {/* Contact Box */}
-          <div className="mt-10 max-w-3xl mx-auto rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-8">
-            
-            <div className="divide-y divide-white/10">
+          {/* RIGHT SIDE (CONTACT PANEL) */}
+          <div className="relative rounded-3xl border border-gray-200 bg-white shadow-xl p-6 md:p-8">
+
+            {/* subtle highlight */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
+
+            <div className="divide-y divide-gray-200">
+
               {contacts.map((item, i) => {
                 const Icon = item.icon;
 
                 return (
                   <div
                     key={i}
-                    className="flex items-center justify-between py-4 gap-4"
+                    onClick={() => handleClick(item)}
+                    className="flex items-center justify-between py-4 gap-4 cursor-pointer group"
                   >
-                    {/* Left: Icon + Label */}
-                    <div className="flex items-center gap-3 text-white/60 text-sm">
-                      <Icon size={16} />
+                    {/* LEFT */}
+                    <div className="flex items-center gap-3 text-sm text-gray-500">
+                      <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-100 group-hover:bg-blue-50 transition">
+                        <Icon size={16} className="text-gray-600 group-hover:text-blue-600" />
+                      </div>
                       <span>{item.label}</span>
                     </div>
 
-                    {/* Right: Value */}
-                    <div className="text-sm">
-                      {renderValue(item)}
+                    {/* RIGHT */}
+                    <div className="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition">
+                      {item.type === "link"
+                        ? item.value.replace("https://", "")
+                        : item.value}
                     </div>
                   </div>
                 );
               })}
+
             </div>
+
           </div>
 
         </div>
-      </section>
-    </Container>
+        <Modal open={open} onClose={() => setOpen(false)}>
+                <RequirementForm onClose={() => setOpen(false)} />
+              </Modal>
+
+      </Container>
+    </section>
   );
 }

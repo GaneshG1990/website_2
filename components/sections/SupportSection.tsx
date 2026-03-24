@@ -15,17 +15,16 @@ export default function SupportSection() {
   ];
 
   return (
-    <section className="py-16 md:py-20 bg-gray-50">
+    <section className="py-4 md:py-6 bg-gray-50"> {/* 🔥 reduced spacing */}
       <Container>
 
-        {/* SECTION BOX */}
         <div className="relative rounded-3xl border border-gray-200 bg-white shadow-xl p-8 md:p-12">
 
           {/* subtle top highlight */}
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent" />
 
-          {/* HEADER */}
-          <div className="max-w-2xl">
+          {/* ================= HEADER (CENTERED) ================= */}
+          <div className="max-w-2xl mx-auto text-center"> {/* 🔥 FIX */}
             <p className="text-xs tracking-widest text-gray-500 uppercase">
               EXPERT GUIDANCE & SUPPORT
             </p>
@@ -35,17 +34,16 @@ export default function SupportSection() {
             </h2>
           </div>
 
-          {/* CARDS */}
-          <div className="mt-10 grid md:grid-cols-2 gap-6">
+          {/* ================= CARDS ================= */}
+          <div className="mt-8 md:mt-10 grid md:grid-cols-2 gap-6"> {/* 🔥 tighter */}
             {items.map((item, i) => (
               <div
                 key={i}
                 className="group relative p-6 md:p-8 rounded-2xl 
-                bg-white border border-gray-200 shadow-sm 
+                bg-blue-100 border border-gray-200 shadow-sm 
                 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
-
-                {/* subtle brand tint */}
+                {/* hover tint */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition
                 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent" />
 
@@ -58,7 +56,6 @@ export default function SupportSection() {
                     {item.desc}
                   </p>
                 </div>
-
               </div>
             ))}
           </div>
