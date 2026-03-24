@@ -1,55 +1,127 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Container from "../ui/container";
 
+const slides = [
+  {
+    title: "BUILD SMARTER",
+    subtitle: "GROW FASTER",
+    desc: "We design AI-powered systems that scale your business and automate workflows.",
+  },
+  {
+    title: "AUTOMATE BUSINESS",
+    subtitle: "WITH AI",
+    desc: "Transform operations with intelligent automation and real-time insights.",
+  },
+  {
+    title: "CREATE DIGITAL",
+    subtitle: "EXPERIENCES",
+    desc: "We build scalable apps, platforms, and AI-driven products.",
+  },
+];
+
 export default function HeroSection() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const next = () => setIndex((prev) => (prev + 1) % slides.length);
+  const prev = () =>
+    setIndex((prev) => (prev - 1 + slides.length) % slides.length);
+
   return (
     <Container>
-      <section className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl mt-10">
+<section className="relative pt-16 pb-10 md:pt-20 md:pb-14 rounded-3xl overflow-hidden border border-white/10 shadow-xl">
+        {/* Clean gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700" />
 
-        {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-indigo-600" />
+        {/* Soft overlay */}
         <div className="absolute inset-0 bg-black/20" />
 
-        {/* Animated blobs */}
+        {/* Subtle animated glow */}
         <motion.div
-          animate={{ y: [0, -30, 0] }}
-          transition={{ duration: 6, repeat: Infinity }}
-          className="absolute top-10 left-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"
-        />
-
-        <motion.div
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute bottom-10 right-10 w-32 h-32 bg-white/10 rounded-full blur-3xl"
+          className="absolute -top-40 -left-40 w-[400px] h-[200px] bg-blue-500/20 rounded-full blur-[120px]"
+          animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
 
         {/* Content */}
-        <div className="relative z-10 text-center px-6 py-32">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-widest">
-            BUILD SMARTER <br /> GROW FASTER
-          </h1>
+<div className="relative z-10 px-6 py-10 md:py-12 text-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              {/* Title */}
+              <h1 className="text-4xl md:text-6xl font-extrabold tracking-wider text-white">
+                {slides[index].title} <br />
+                {slides[index].subtitle}
+              </h1>
 
-          <p className="mt-6 text-sm tracking-[0.3em] text-white/80 uppercase">
-            THE BEST WAY TO SUCCESS
-          </p>
+              {/* Description */}
+              <p className="mt-6 max-w-2xl mx-auto text-white/80 text-sm md:text-base">
+                {slides[index].desc}
+              </p>
+            </motion.div>
+          </AnimatePresence>
 
-          <p className="mt-6 max-w-2xl mx-auto text-white/80">
-            From Idea to Intelligence: We build the full digital stack,
-            empowered by AI. Custom Software, Powerful AI, and Professional
-            Apps that drive your business forward.
-          </p>
-
-          <div className="mt-10 flex justify-center gap-4">
+          {/* CTA */}
+          <div className="mt-10 flex justify-center gap-4 flex-wrap">
             <button className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:scale-105 transition">
-              GET STARTED
+              Get Started
             </button>
 
-            <button className="px-6 py-3 rounded-full border border-white/30 hover:bg-white/10 transition">
-              CONTACT US
+            <button className="px-6 py-3 rounded-full border border-white/30 text-white hover:bg-white/10 transition">
+              Contact Us
             </button>
           </div>
+
+          {/* Dots */}
+          <div className="mt-8 flex justify-center gap-2">
+            {slides.map((_, i) => (
+              <div
+                key={i}
+                onClick={() => setIndex(i)}
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer
+                  ${
+                    i === index
+                      ? "w-6 bg-white"
+                      : "w-2 bg-white/40 hover:bg-white/60"
+                  }`}
+              />
+            ))}
+          </div>
+
+          {/* Arrows */}
+          <div className="absolute inset-y-0 left-0 flex items-center">
+            <button
+              onClick={prev}
+              className="ml-4 p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur border border-white/10 transition"
+            >
+              <ChevronLeft className="text-white" />
+            </button>
+          </div>
+
+          <div className="absolute inset-y-0 right-0 flex items-center">
+            <button
+              onClick={next}
+              className="mr-4 p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur border border-white/10 transition"
+            >
+              <ChevronRight className="text-white" />
+            </button>
+          </div>
+
         </div>
       </section>
     </Container>

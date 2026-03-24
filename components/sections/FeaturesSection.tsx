@@ -1,58 +1,119 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Cpu, Bot, Workflow } from "lucide-react";
 import Container from "../ui/container";
-import AnimatedSection from "../ui/AnimatedSection";
-import Card from "../ui/Card";
+
+/* Stagger animation */
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45 },
+  },
+};
 
 export default function FeaturesSection() {
   const features = [
     {
       icon: Workflow,
       title: "Business Task Automation",
-      desc: "Automate repetitive workflows and boost productivity.",
+      desc: "Automate workflows and remove repetitive operations to increase productivity.",
     },
     {
       icon: Cpu,
-      title: "Custom AI Tools",
-      desc: "Predict trends and optimize business decisions.",
+      title: "Custom AI Intelligence",
+      desc: "Build intelligent systems that learn from data and optimize decisions.",
     },
     {
       icon: Bot,
       title: "Smart Assistants",
-      desc: "24/7 AI assistants for seamless operations.",
+      desc: "Deploy AI assistants that handle operations and customer interactions.",
     },
   ];
 
   return (
-    <Container>
-      <AnimatedSection>
-        <section className="relative mt-20 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-          
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500" />
-          <div className="absolute inset-0 bg-black/30" />
+    <section className="py-20 md:py-24 bg-white">
+      <Container>
+        <div>
 
-          <div className="relative z-10 px-8 py-16">
-            <h2 className="text-3xl font-bold text-white">
+          {/* 🔹 Soft separator (fix for your issue) */}
+          <div className="flex justify-center mb-10">
+            <div className="h-px w-24 bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+          </div>
+
+          {/* HEADER */}
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-xs tracking-widest text-gray-500 uppercase">
+              OUR CORE FOCUS
+            </p>
+
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold text-gray-900">
               We Solve Your Toughest Business Problems
             </h2>
 
-            <div className="mt-10 grid md:grid-cols-3 gap-6">
-              {features.map((item, i) => (
-                <Card key={i}>
-                  <item.icon className="text-white mb-4" />
-                  <h3 className="text-lg font-semibold text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-white/80 text-sm">
-                    {item.desc}
-                  </p>
-                </Card>
-              ))}
-            </div>
+            <p className="mt-4 text-gray-600">
+              We design intelligent systems that automate workflows, enhance
+              decision-making, and scale your business efficiently.
+            </p>
           </div>
-        </section>
-      </AnimatedSection>
-    </Container>
+
+          {/* CARDS */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="mt-14 grid md:grid-cols-3 gap-6"
+          >
+            {features.map((f, i) => {
+              const Icon = f.icon;
+
+              return (
+                <motion.div
+                  key={i}
+                  variants={item}
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  className="group relative p-6 rounded-2xl 
+                  bg-white border border-gray-200 shadow-md 
+                  hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="relative z-10">
+
+                    {/* ICON */}
+                    <div className="w-12 h-12 flex items-center justify-center rounded-xl 
+                    bg-gradient-to-br from-blue-600 to-purple-600 mb-4">
+                      <Icon size={22} className="text-white" />
+                    </div>
+
+                    {/* TITLE */}
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {f.title}
+                    </h3>
+
+                    {/* DESC */}
+                    <p className="mt-3 text-sm text-gray-600 leading-relaxed">
+                      {f.desc}
+                    </p>
+
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+        </div>
+      </Container>
+    </section>
   );
 }

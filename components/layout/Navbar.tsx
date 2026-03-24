@@ -8,45 +8,71 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header className="fixed top-0 w-full z-50">
-      <Container>
-        <div
-          className={`flex items-center justify-between mt-4 px-6 py-3 rounded-2xl transition-all duration-300
-          ${
-            scrolled
-              ? "bg-black/40 backdrop-blur-xl border border-white/10 shadow-lg"
-              : "bg-transparent"
-          }`}
-        >
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <Image src="/images/logo.png" alt="logo" width={36} height={36} />
-            <span className="font-semibold tracking-wide">
-              UNISHRINE
-            </span>
+     <div
+  className={`w-full transition-all duration-300
+  ${
+    scrolled
+      ? "bg-white/80 backdrop-blur-xl border-b border-gray-200 shadow-sm"
+      : "bg-white/60 backdrop-blur-md"
+  }`}
+>
+        <Container>
+          <div className="flex items-center justify-between h-16">
+
+            {/* LOGO */}
+            <div className="flex items-center gap-3">
+              <Image
+                src="/images/logo.svg"
+                alt="logo"
+                width={34}
+                height={34}
+              />
+
+              <span className="text-gray-900 font-semibold tracking-wide text-lg">
+                UNISHRINE
+              </span>
+            </div>
+
+            {/* NAV */}
+            <nav className="hidden md:flex items-center gap-8 text-sm">
+              <a className="text-gray-600 hover:text-gray-900 transition" href="#">
+                SERVICES
+              </a>
+
+              <a className="text-gray-600 hover:text-gray-900 transition" href="#">
+                PRODUCTS
+              </a>
+
+              <a className="text-gray-600 hover:text-gray-900 transition" href="#">
+                CONTACT
+              </a>
+            </nav>
+
+            {/* ACTIONS */}
+            <div className="flex items-center gap-3">
+              <button className="text-sm text-gray-600 hover:text-gray-900 transition">
+                LOGIN
+              </button>
+
+              <button
+                className="px-5 py-2 rounded-full text-sm font-medium text-white 
+                bg-gradient-to-r from-blue-600 to-purple-600 
+                hover:opacity-90 transition"
+              >
+                Get Started
+              </button>
+            </div>
+
           </div>
-
-          {/* Menu */}
-          <nav className="flex items-center gap-8 text-sm text-white/80">
-            <a className="hover:text-white transition" href="#">
-              OUR SERVICES
-            </a>
-            <a className="hover:text-white transition" href="#">
-              CONTACT
-            </a>
-
-            
-          </nav>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </header>
   );
 }

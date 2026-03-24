@@ -20,12 +20,22 @@ export default function ProductSection() {
   ];
 
   return (
-    <Container>
-      <FeatureGrid
-        label="DIGITAL PRODUCTS & APPS"
-        heading="The Right Tool, Built the Right Way"
-        features={features}
-      />
-    </Container>
+    <section className="relative py-8 md:py-14 bg-gray-1 overflow-hidden">
+
+      {/* top separator */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+
+      <Container>
+        <div className="relative rounded-3xl border border-gray-200 bg-white shadow-xl p-8 md:p-12">
+
+          <FeatureGrid
+            label="DIGITAL PRODUCTS & APPS"
+            heading="The Right Tool, Built the Right Way"
+            features={features}
+          />
+
+        </div>
+      </Container>
+    </section>
   );
 }

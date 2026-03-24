@@ -8,21 +8,29 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative min-h-screen text-white overflow-x-hidden">
+      <body className="relative min-h-screen text-black overflow-x-hidden">
 
-        {/* 🔥 Animated Background */}
-        <div className="fixed inset-0 -z-10 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#020617]" />
+  {/* 🌟 LIGHT GLOBAL BACKGROUND */}
+  <div className="fixed inset-0 -z-10">
 
-          {/* moving gradient */}
-          <div className="absolute w-[600px] h-[600px] bg-purple-600/30 rounded-full blur-[120px] animate-float top-[-200px] left-[-200px]" />
-          <div className="absolute w-[600px] h-[600px] bg-pink-500/30 rounded-full blur-[120px] animate-floatSlow bottom-[-200px] right-[-200px]" />
-        </div>
+    {/* Base white */}
+    <div className="absolute inset-0 bg-white" />
 
-        <Navbar />
+    {/* soft gradient tint */}
+    <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
 
-        <main className="pt-24">{children}</main>
-      </body>
+    {/* subtle glow */}
+    <div className="absolute top-[-200px] left-[-200px] w-[500px] h-[500px] bg-blue-200/40 blur-[120px] rounded-full" />
+
+    <div className="absolute bottom-[-200px] right-[-200px] w-[500px] h-[500px] bg-purple-200/40 blur-[120px] rounded-full" />
+
+  </div>
+
+  {/* content */}
+  <Navbar />
+  <main className="pt-24">{children}</main>
+
+</body>
     </html>
   );
 }

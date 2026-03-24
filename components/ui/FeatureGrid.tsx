@@ -1,59 +1,63 @@
 "use client";
 
-type Feature = {
+import { motion } from "framer-motion";
+
+interface Feature {
   title: string;
   desc: string;
-};
+}
 
-export default function FeatureGrid({
-  label,
-  heading,
-  features,
-}: {
+interface Props {
   label: string;
   heading: string;
   features: Feature[];
-}) {
+}
+
+export default function FeatureGrid({ label, heading, features }: Props) {
   return (
-    <section className="relative mt-20 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-      
-      {/* Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-indigo-600" />
+    <div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/30" />
-
-      {/* Content */}
-      <div className="relative z-10 px-8 py-16">
-        
-        {/* Header */}
-        <p className="text-xs tracking-widest text-white/70 uppercase">
+      {/* HEADER */}
+      <div className="max-w-2xl mx-auto text-center">
+        <p className="text-xs tracking-widest text-blue-600 font-semibold">
           {label}
         </p>
 
-        <h2 className="mt-4 text-3xl md:text-4xl font-bold text-white">
+        <h2 className="mt-3 text-3xl md:text-4xl font-bold text-gray-900">
           {heading}
         </h2>
+      </div>
 
-        {/* Cards */}
-        <div className="mt-10 grid md:grid-cols-3 gap-6">
-          {features.map((item, i) => (
-            <div
-              key={i}
-              className="p-6 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 
-              hover:bg-white/20 hover:scale-[1.03] transition-all duration-300"
-            >
-              <h3 className="text-lg font-semibold text-white">
-                {item.title}
+      {/* GRID */}
+      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+        {features.map((feature, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ y: -6, scale: 1.02 }}
+            className="group relative rounded-2xl border border-gray-200 bg-white p-6 
+            shadow-sm hover:shadow-lg transition-all duration-300"
+          >
+
+            {/* SUBTLE BRAND GLOW */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-300
+            bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent" />
+
+            {/* CONTENT */}
+            <div className="relative z-10">
+              <h3 className="text-lg font-semibold text-gray-900">
+                {feature.title}
               </h3>
 
-              <p className="mt-3 text-sm text-white/80 leading-relaxed">
-                {item.desc}
+              <p className="mt-3 text-sm text-gray-600 leading-relaxed">
+                {feature.desc}
               </p>
             </div>
-          ))}
-        </div>
+
+          </motion.div>
+        ))}
+
       </div>
-    </section>
+    </div>
   );
 }
